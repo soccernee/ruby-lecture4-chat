@@ -1,13 +1,18 @@
 <h1>Welcome</h1>
-<p>This is a basic chat app</p>
+<p>Please choose a room</p>
 
-<div class="messages">
-  <%= render @messages %>
-  <%= form_for @message do |f| %>
-    <div class="form-inline">
-      <%= f.text_field :content, placeholder: "Message...", class: 'form-control', required: true %>
-      <%= f.text_field :username, placeholder: "Username...", class: 'form-control' %>
-      <%= f.submit "Send", class: 'btn btn-secondary' %>
-    </div>
-  <% end %>
+<div class="list-group" style="margin-bottom: 20px">
+<% Room.all.each do |room| %>
+  <div class="list-group-item">
+    <%= link_to room.name, room %>
+    <span class="tag tag-primary tag-pill float-xs-right"><%= room.messages.size %></span>
+  </div>
+<% end %>
 </div>
+
+<%= form_for Room.new do |f| %>
+  <div class="form-group">
+    <%= f.text_field :name, class: 'form-control' %>
+    <%= f.submit "Create", class: 'btn btn-secondary' %>
+  </div>
+<% end %>

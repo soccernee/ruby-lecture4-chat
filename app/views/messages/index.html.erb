@@ -1,0 +1,11 @@
+<h1>Room <%= @room.name %></h1>
+<div class="messages">
+  <%= render @messages %>
+  <%= form_for [@room, Message.new] do |f| %>
+    <div class="form-inline">
+      <%= f.text_field :content, placeholder: "Message...", class: 'form-control', required: true %>
+      <%= f.text_field :username, placeholder: "Username...", class: 'form-control' %>
+      <%= f.submit "Send", class: 'btn btn-secondary' %>
+    </div>
+  <% end %>
+</div>
