@@ -1,4 +1,4 @@
-window.updateMessages = function() {
+window.updateMessagesViaJSON = function() {
   $.getJSON(window.location.pathname + ".json", function(messages) {
     e = $('.messages')
     e.html('')
@@ -7,4 +7,8 @@ window.updateMessages = function() {
       e.append("<div class='message'><strong>" + message.username + "</strong> " + message.content + "</div>")
     }
   })
+}
+
+window.updateMessagesViaJS = function() {
+  $.ajax({ url: window.location.pathname, dataType: 'script' });
 }

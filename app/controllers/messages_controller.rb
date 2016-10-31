@@ -6,6 +6,7 @@ class MessagesController < ApplicationController
     respond_to do |format|
       format.json { render json: @messages }
       format.html
+      format.js
     end
   end
 
@@ -14,11 +15,16 @@ class MessagesController < ApplicationController
     @message = @room.messages.build message_params
     @message.username = current_user
 
-    if @message.save
-      redirect_to room_messages_path(@room)
-    else
-      flash[:error] = "Error: #{@message.errors.full_messages.to_sentence}"
-      redirect_to root_path
+    respond_to do |format|
+      format.html do
+        if @message.save
+          redirect_to room_messages_path(@room)
+        else
+          flash[:error] = "Error: #{@message.errors.full_messages.to_sentence}"
+          redirect_to root_path
+        end
+      end
+      format.js 
     end
   end
 

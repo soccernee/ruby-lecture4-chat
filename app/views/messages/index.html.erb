@@ -2,24 +2,13 @@
 <div class="messages">
   <%= render @messages %>
 </div>
-<%= form_for [@room, Message.new] do |f| %>
+<%= form_for [@room, Message.new], remote: true do |f| %>
   <div class="form-inline">
     <%= f.text_field :content, placeholder: "Message...", class: 'form-control', required: true %>
-    <%= f.submit "Send", class: 'btn btn-secondary' %>
+    <%= f.submit "Send", class: 'btn btn-secondary', data: {disable_with: "Adding..."} %>
   </div>
 <% end %>
 
 <script type="text/javascript" charset="utf-8">
-  function updateMessages() {
-    $.getJSON(window.location.pathname + ".json", function(messages) {
-      e = $('.messages')
-      e.html('')
-      for (i in messages) {
-        message = messages[i]
-        e.append("<div class='message'><strong>" + message.username + "</strong> " + message.content + "</div>")
-      }
-    })
-  }
-
-  setInterval(updateMessages, 3000)
+  setInterval(updateMessagesViaJS, 3000)
 </script>
