@@ -2,6 +2,11 @@ class MessagesController < ApplicationController
   def index
     load_room
     @messages = @room.messages
+
+    respond_to do |format|
+      format.json { render json: @messages }
+      format.html
+    end
   end
 
   def create
