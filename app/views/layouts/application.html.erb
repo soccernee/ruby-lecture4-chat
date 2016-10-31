@@ -15,6 +15,19 @@
         <li class="nav-item active">
           <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
         </li>
+
+        <li class="nav-item">
+          <% if current_user %>
+            <%= link_to "Log out #{current_user}", logout_path, class: 'nav-link' %>
+          <% else %>
+            <%= form_tag login_path do %>
+              <div class="form-inline">
+                <%= text_field_tag :username, params[:username], class: 'form-control' %>
+                <%= submit_tag "Login", class: 'btn btn-primary' %>
+              </div>
+            <% end %>
+          <% end %>
+        </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="supportedContentDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
           <div class="dropdown-menu" aria-labelledby="supportedContentDropdown">

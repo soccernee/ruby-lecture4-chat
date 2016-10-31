@@ -7,6 +7,8 @@ class MessagesController < ApplicationController
   def create
     load_room
     @message = @room.messages.build message_params
+    @message.username = current_user
+
     if @message.save
       redirect_to room_messages_path(@room)
     else
@@ -18,7 +20,7 @@ class MessagesController < ApplicationController
   private
 
   def message_params
-    params.require(:message).permit(:username, :content)
+    params.require(:message).permit(:content)
   end
 
   def load_room
