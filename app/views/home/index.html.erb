@@ -11,8 +11,8 @@
 </div>
 
 <%= form_for Room.new do |f| %>
-  <div class="form-group">
-    <%= f.text_field :name, class: 'form-control' %>
+  <div class="form-inline">
+    <%= f.text_field :name, class: 'form-control', placeholder: "Room name" %>
     <%= f.submit "Create", class: 'btn btn-secondary' %>
   </div>
 <% end %>

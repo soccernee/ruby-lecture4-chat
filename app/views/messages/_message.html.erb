@@ -1,4 +1,5 @@
 <div class="message" id="<%= dom_id message %>">
+  <div class="timestamp float-xs-right"><%= time_ago_in_words message.updated_at %> ago</div>
   <strong><%= message.username_or_default %></strong>
   <%= message.content %>
 </div>
