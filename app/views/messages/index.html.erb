@@ -1,14 +1,7 @@
 <h1>Room <%= @room.name %></h1>
-<div class="messages">
+<div class="messages" data-room-id="<%= @room.id %>">
   <%= render @messages %>
 </div>
-<%= form_for [@room, Message.new], remote: true do |f| %>
-  <div class="form-inline">
-    <%= f.text_field :content, placeholder: "Message...", class: 'form-control', required: true %>
-    <%= f.submit "Send", class: 'btn btn-secondary', data: {disable_with: "Adding..."} %>
-  </div>
-<% end %>
-
-<script type="text/javascript" charset="utf-8">
-  setInterval(updateMessagesViaJS, 3000)
-</script>
+<div>
+    <%= text_field_tag :content, nil, placeholder: "Message...", class: 'form-control' %>
+</div>
