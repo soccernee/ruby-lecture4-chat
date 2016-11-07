@@ -2,9 +2,5 @@
 <div class="messages">
   <%= render @messages %>
 </div>
-<%= form_for [@room, Message.new], remote: true do |f| %>
-  <div class="form-inline">
-    <%= f.text_field :content, placeholder: "Message...", class: 'form-control', required: true %>
-    <%= f.submit "Send", class: 'btn btn-secondary', data: {disable_with: "Adding..."} %>
-  </div>
-<% end %>
+
+<%= text_field_tag :content, nil, placeholder: "Message...", data: {room: @room.id}, class: 'form-control' %>
