@@ -1,3 +1,10 @@
-// Place all the styles related to the Rooms controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.appear-on {
+  font-size: 0.8em;
+  font-color: #999;
+  font-style: italic;
+}
+
+.user-item {
+  border: 1px solid #efefef;
+  padding: 5px 10px;
+}

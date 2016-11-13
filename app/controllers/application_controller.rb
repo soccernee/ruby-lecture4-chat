@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def current_user
-    session[:username]
+    return @current_user if @current_user
+    @current_user = User.find_by(username: session[:username])
   end
 end

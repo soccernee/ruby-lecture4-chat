@@ -1,0 +1,10 @@
+<% User.online.each do |user| %>
+  <div class="user-item">
+    <%= user.username %>
+    <span class="tag tag-default"><%= user.appearing_on %></span>
+    <div class="appear-on">
+      last seen <%= time_ago_in_words(user.last_online_at) if user.last_online_at %> ago.
+    </div>
+  </div>
+<% end %>
+

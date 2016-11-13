@@ -6,11 +6,14 @@ module ApplicationCable
     end
 
     def session
-      cookies.encrypted[Rails.application.config.session_options[:key]]
+      cookies.encrypted[Rails.application.config.session_options[:key]].with_indifferent_access
     end
 
     def current_user
-      session["username"]
+      return @current_user if @current_user
+      if session[:username].present?
+        @current_user = User.find_by(username: session[:username])
+      end
     end
   end
 end

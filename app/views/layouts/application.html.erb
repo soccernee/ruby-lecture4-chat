@@ -30,9 +30,18 @@
         </li>
       </ul>
     </nav>
-    <div class="container">
+    <div class="container-fluid">
       <%= flash_messages %>
-      <%= yield %>
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="online_users">
+            <%= render 'layouts/online_users' %>
+          </div>
+        </div>
+        <div class="col-sm-9">
+          <%= yield %>
+        </div>
+      </div>
     </div>
   </body>
 </html>

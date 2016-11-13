@@ -12,7 +12,7 @@ App.messages = App.cable.subscriptions.create("MessagesChannel", {
   received: function(data) {
     console.log("received", data);
     if (data.method == "append") {
-      $(".messages").append(data.html)
+      $(".messages").append(data.html);
     }
     // Called when there's incoming data on the websocket for this channel
   },
