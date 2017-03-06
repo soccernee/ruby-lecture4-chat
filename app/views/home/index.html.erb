@@ -1,2 +1,19 @@
 <h1>Welcome</h1>
-<p>This is a basic chat app</p>
+<p>Choose your room</p>
+
+<ul>
+  <% @rooms.each do |room| %>
+    <li><%= room.name %></li>
+  <% end %>
+</ul>
+
+<%= form_for Room.new do |f| %>
+  <div class="card card-block">
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'form-control' %>
+    </div>
+    <%= f.submit nil, class: 'btn btn-primary' %>
+  </div>
+<% end %>
+
