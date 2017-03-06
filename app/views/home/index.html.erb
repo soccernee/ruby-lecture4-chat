@@ -3,17 +3,26 @@
 
 <ul>
   <% @rooms.each do |room| %>
-    <li><%= room.name %></li>
+    <li>
+      <%= link_to room.name, room %>
+      <span class="badge badge-primary"><%= room.messages.count %></span>
+    </li>
   <% end %>
 </ul>
 
-<%= form_for Room.new do |f| %>
+<%= form_for @room do |f| %>
   <div class="card card-block">
     <div class="form-group">
-      <%= f.label :name %>
+      <%= f.label :name, "Room name" %>
       <%= f.text_field :name, class: 'form-control' %>
     </div>
-    <%= f.submit nil, class: 'btn btn-primary' %>
+    <%= f.fields_for :messages do |field| %>
+      <div class="form-inline">
+        <%= field.text_field :username, placeholder: "Username", class: 'form-control mr-2', required: true %>
+        <%= field.text_field :body, placeholder: "Your first message", class: 'form-control mr-2', required: true %>
+        <%= f.submit nil, class: 'btn btn-primary' %>
+      </div>
+    <% end %>
   </div>
 <% end %>
 

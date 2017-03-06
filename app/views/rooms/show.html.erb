@@ -1,20 +1,20 @@
 <h1>Room: <%= @room.name %></h1>
 
-<div class="list-group">
-  <div class="list-group-item">Message 1</div>
-  <div class="list-group-item">Message 1</div>
-  <div class="list-group-item">Message 1</div>
-  <div class="list-group-item">Message 1</div>
-  <div class="list-group-item">Message 1</div>
+<div class="list-group mb-3">
+  <% @messages.each do |message| %>
+    <div class="list-group-item">
+        <div class="badge badge-primary mr-1"><%= message.username %></div>
+        <div> <%= message.body %> </div>
+    </div>
+  <% end %>
 </div>
 
-<%= form_for [@room, Message.new] do |f|  %>
-  <div class="form-group">
-    <%= f.label :body %>
-    <%= f.text_field :body, class: 'form-control' %>
+<%= form_for [@room, @message = Message.new(username: current_user)] do |f|  %>
+  <div class="card card-block">
+    <div class="d-flex justify-space-between">
+      <%= f.text_field :body, class: 'form-control mr-2', placeholder: "Type your message...", required: true %>
+      <%= f.text_field :username, class: 'form-control mr-2', placceholder: "Username", required: true %>
+      <%= f.submit nil, class: 'btn btn-primary' %>
+    </div>
   </div>
-  <div class="form-group">
-    <%= f.label :username %>
-    <%= f.text_field :username, class: 'form-control' %>
-  </div>
-</form>
+<% end %>
