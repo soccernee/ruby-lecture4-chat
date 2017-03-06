@@ -1,10 +1,22 @@
 class MessagesController < ApplicationController
+  def index
+    set_room
+    @messages = @room.messages
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
 
   # POST /room/:id/messages
   def create
     set_room
     @message = @room.messages.build message_params
     if @message.save
+      unless current_user
+        session[:username] = @message.username
+      end
       redirect_to @room
     else
       flash[:error] = "Error: #{@message.errors.full_messages.to_sentence}"

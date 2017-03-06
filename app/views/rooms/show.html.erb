@@ -1,12 +1,7 @@
 <h1>Room: <%= @room.name %></h1>
 
-<div class="list-group mb-3">
-  <% @messages.each do |message| %>
-    <div class="list-group-item">
-        <div class="badge badge-primary mr-1"><%= message.username %></div>
-        <div> <%= message.body %> </div>
-    </div>
-  <% end %>
+<div class="messages list-group mb-3">
+  <%= render @messages %>
 </div>
 
 <%= form_for [@room, @message = Message.new(username: current_user)] do |f|  %>
@@ -18,3 +13,13 @@
     </div>
   </div>
 <% end %>
+
+<script type="text/javascript" charset="utf-8">
+  function reload() {
+    $.get("<%= room_messages_path(@room, format: :js) %>", function(response) {
+      console.log("run successfully ")
+    })
+  }
+
+  setInterval(reload, 3000);
+</script>
