@@ -6,6 +6,7 @@ class MessagesController < ApplicationController
     respond_to do |format|
       format.html
       format.js
+      format.json { render json: @messages }
     end
   end
 
@@ -13,15 +14,26 @@ class MessagesController < ApplicationController
   def create
     set_room
     @message = @room.messages.build message_params
+
     if @message.save
       unless current_user
         session[:username] = @message.username
       end
-      redirect_to @room
-    else
-      flash[:error] = "Error: #{@message.errors.full_messages.to_sentence}"
-      redirect_back fallback_location: room_path(@room)
     end
+
+    respond_to do |format|
+      format.html do
+        if @message.persisted?
+          redirect_to @room
+        else
+          flash[:error] = "Error: #{@room.errors.full_messages.to_sentence}"
+          redirect_back fallback_location: root_path
+        end
+      end
+
+      format.js
+    end
+
   end
 
   private
