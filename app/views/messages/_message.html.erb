@@ -1,5 +1,6 @@
 <div class="list-group-item d-flex justify-content-start">
   <div class="badge badge-primary mr-1"><%= message.username %></div>
   <div> <%= message.body %> </div>
-  <span class="timestamp ml-auto"><%= time_ago_in_words message.updated_at %></span>
+  <span class="ip ml-auto">@<%= message.ip %></span>
+  <span class="timestamp"><%= time_ago_in_words message.updated_at %></span>
 </div>

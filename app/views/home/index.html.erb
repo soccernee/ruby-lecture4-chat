@@ -11,13 +11,12 @@
 </ul>
 
 <%= form_for @room do |f| %>
-  <div class="card card-block">
-    <div class="form-group">
-      <%= f.label :name, "Room name" %>
-      <%= f.text_field :name, class: 'form-control' %>
+  <div class="card card-block" style="max-width: 600px">
+    <div class="mb-2">
+      <%= f.text_field :name, class: 'form-control', placeholder: "Room name" %>
     </div>
     <%= f.fields_for :messages do |field| %>
-      <div class="form-inline">
+      <div class="d-flex">
         <%= field.text_field :username, placeholder: "Username", class: 'form-control mr-2', required: true %>
         <%= field.text_field :body, placeholder: "Your first message", class: 'form-control mr-2', required: true %>
         <%= f.submit nil, class: 'btn btn-primary' %>

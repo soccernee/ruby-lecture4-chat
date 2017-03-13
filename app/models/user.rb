@@ -21,4 +21,8 @@ class User < ApplicationRecord
     self.appeared_at = nil
     save!
   end
+
+  def messages
+    Message.where(username: username)
+  end
 end

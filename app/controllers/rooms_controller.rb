@@ -9,6 +9,7 @@ class RoomsController < ApplicationController
 
     if @room.save
       if (message = @room.messages.first) && message.username.present?
+        message.update_column :ip, request.remote_ip
         sign_in!(message.username)
       end
 

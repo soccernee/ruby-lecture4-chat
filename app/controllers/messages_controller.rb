@@ -14,7 +14,10 @@ class MessagesController < ApplicationController
   def create
     set_room
     @message = @room.messages.build message_params
-    @message.username ||= current_user.try(:username)
+    @message.ip = request.remote_ip
+    if current_user
+      @message.username = current_user.username
+    end
 
     if @message.save
       if !current_user && @message.username.present?

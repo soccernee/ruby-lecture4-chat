@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  mount ActionCable.server => '/cable'
+
   delete 'logout' => 'users#logout'
   resources :users
   resources :rooms do
