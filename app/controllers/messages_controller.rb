@@ -14,6 +14,7 @@ class MessagesController < ApplicationController
   def create
     set_room
     @message = @room.messages.build message_params
+    @message.username || current_user.try(:username)
 
     if @message.save
       if !current_user && @message.username.present?
@@ -33,7 +34,6 @@ class MessagesController < ApplicationController
 
       format.js
     end
-
   end
 
   private

@@ -1,32 +1,37 @@
 <h1>Room: <%= @room.name %></h1>
 
-<div class="messages list-group mb-3">
-  <%= render @messages %>
-</div>
-
-<%= form_for [@room, @message = Message.new(username: current_user)], remote: true do |f|  %>
-  <p>I'm not crazy right</p>
-  <div class="card card-block">
-    <div class="d-flex justify-space-between">
+<%= form_for [@room, @message = Message.new(username: current_user.try(:username))], remote: true do |f|  %>
+  <div class="card card-block card-inverse card-info">
+    <div class="d-flex">
+      <% if current_user %>
+        <span class="badge badge-primary mr-2 p-3"><%= current_user %></span>
+        <%= f.hidden_field :username %>
+      <% else %>
+        <%= f.text_field :username, class: 'mr-2', placceholder: "Username", required: true %>
+      <% end %>
       <%= f.text_field :body, class: 'form-control mr-2', placeholder: "Type your message...", required: true %>
-      <%= f.text_field :username, class: 'form-control mr-2', placceholder: "Username", required: true %>
       <%= f.submit nil, class: 'btn btn-primary' %>
     </div>
   </div>
 <% end %>
 
+<div class="messages list-group mb-3 mt-3">
+  <%= render @messages %>
+</div>
+
 <script type="text/javascript" charset="utf-8">
-  function reload() {
+  function reloadViaJs() {
     $.get("<%= room_messages_path(@room, format: :js) %>", function(response) {
       console.log("run successfully ")
     })
   }
 
-  function reloadJSON() {
+  function reloadViaJSON() {
     $.getJSON("<%= room_messages_path(@room, format: :json) %>", function(response) {
       console.log("data: ", response);
     })
   }
 
-  // setInterval(reload, 3000);
+  // setInterval(reloadViaJs, 3000);
+  // setInterval(reloadViaJs, 3000);
 </script>
