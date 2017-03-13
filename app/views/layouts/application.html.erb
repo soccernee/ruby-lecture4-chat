@@ -17,7 +17,7 @@
         </li>
         <% if current_user %>
           <li class="nav-item">
-            <%= link_to "Log out (#{current_user})", logout_path, class: 'nav-link', method: 'delete' %>
+            <%= link_to "Log out (#{current_user} :: #{current_user.ip})", logout_path, class: 'nav-link', method: 'delete' %>
           </li>
         <% end %>
       </ul>

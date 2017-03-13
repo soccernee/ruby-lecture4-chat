@@ -6,6 +6,8 @@ class ApplicationController < ActionController::Base
     return @current_user if @current_user
     if username = cookies.signed[:username]
       @current_user = User.find_or_create_by(username: username)
+      @current_user.ip = request.remote_ip
+      @current_user.save!
     end
   end
 
