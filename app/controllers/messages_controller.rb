@@ -16,8 +16,8 @@ class MessagesController < ApplicationController
     @message = @room.messages.build message_params
 
     if @message.save
-      unless current_user
-        session[:username] = @message.username
+      if !current_user && @message.username.present?
+        sign_in!(@message.username)
       end
     end
 

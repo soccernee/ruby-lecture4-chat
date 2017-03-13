@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  delete 'logout' => 'users#logout'
+  resources :users
   resources :rooms do
     resources :messages
   end

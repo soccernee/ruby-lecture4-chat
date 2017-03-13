@@ -6,9 +6,10 @@ class RoomsController < ApplicationController
 
   def create
     @room = Room.new room_params
+
     if @room.save
-      if message = @room.messages.first
-        session[:username] = message.username
+      if (message = @room.messages.first) && message.username.present?
+        sign_in!(message.username)
       end
 
       redirect_to @room
