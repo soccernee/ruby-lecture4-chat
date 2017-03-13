@@ -4,16 +4,16 @@ class ApplicationController < ActionController::Base
 
   def current_user
     return @current_user if @current_user
-    if session[:username]
-      @current_user = User.find_or_create_by(username: session[:username])
+    if username = cookies.signed[:username]
+      @current_user = User.find_or_create_by(username: username)
     end
   end
 
   def sign_in!(username)
-    session[:username] = username
+    cookies.signed[:username] = username
   end
 
   def sign_out!
-    session[:username] = nil
+    cookies.signed[:username] = nil
   end
 end
