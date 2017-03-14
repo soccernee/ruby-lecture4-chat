@@ -1,5 +1,7 @@
 <h1>Room: <%= @room.name %></h1>
 
+<input type="text" name="message_body" id="message-body" value="" placeholder="Chat message" />
+
 <%= form_for [@room, @message = Message.new(username: current_user.try(:username))], remote: !!current_user do |f|  %>
   <div class="card card-block card-inverse card-info">
     <div class="d-flex">
@@ -14,7 +16,7 @@
   </div>
 <% end %>
 
-<div class="messages list-group mb-3 mt-3">
+<div class="js-set-up-room messages list-group mb-3 mt-3" data-room-id="<%= @room.id %>">
   <%= render @messages %>
 </div>
 

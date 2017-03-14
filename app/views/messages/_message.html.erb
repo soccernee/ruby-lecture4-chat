@@ -1,6 +1,7 @@
-<div class="list-group-item d-flex justify-content-start">
+<div id="<%= dom_id message %>" class="list-group-item d-flex justify-content-start">
   <div class="badge badge-primary mr-1"><%= message.username %></div>
   <div> <%= message.body %> </div>
   <span class="ip ml-auto">@<%= message.ip %></span>
   <span class="timestamp"><%= time_ago_in_words message.updated_at %></span>
+  <button data-message-id="<%= message.id %>" class="js-delete-message close">&times;</button>
 </div>
