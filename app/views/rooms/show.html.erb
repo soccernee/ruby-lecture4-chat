@@ -1,6 +1,9 @@
 <h1>Room: <%= @room.name %></h1>
 
-<%= form_for [@room, @message = Message.new(username: current_user.try(:username))], remote: !!current_user do |f|  %>
+
+<input type="text" id="message-body" name="message_body" placeholder="Enter message" />
+
+<% form_for [@room, @message = Message.new(username: current_user.try(:username))], remote: !!current_user do |f|  %>
   <div class="card card-block card-inverse card-info">
     <div class="d-flex">
       <% if current_user %>
