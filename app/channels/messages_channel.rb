@@ -8,7 +8,7 @@ class MessagesChannel < ApplicationCable::Channel
   end
 
   def say_hi
-    ActionCable.server.broadcast("#{broadcast_topic}", "Say Hello!")
+    ActionCable.server.broadcast(broadcast_topic, "Say Hello!")
   end
 
   def create_message(message_params)
@@ -26,16 +26,16 @@ class MessagesChannel < ApplicationCable::Channel
       data[:rendered] = "Error: #{@message.errors.full_messages.to_sentence}"
     end
 
-    ActionCable.server.broadcast("#{broadcast_topic}", {message: data})
+    ActionCable.server.broadcast(broadcast_topic, {message: data})
   end
 
-  def delete_message(data) 
+  def delete_message(data)
     @message = Message.find(data['id'])
     Rails.logger.info("delete_message = #{@message.inspect}")
 
     @message.destroy
 
-    ActionCable.server.broadcast("#{broadcast_topic}", {deletedId: @message.id})
+    ActionCable.server.broadcast(broadcast_topic, {deletedId: @message.id})
 
   end
 
