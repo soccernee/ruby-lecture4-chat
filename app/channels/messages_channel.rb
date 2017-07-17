@@ -26,7 +26,7 @@ class MessagesChannel < ApplicationCable::Channel
       data[:rendered] = "Error: #{@message.errors.full_messages.to_sentence}"
     end
 
-    ActionCable.server.broadcast(broadcast_topic, {message: data})
+    BroadcastMessageJob.perform_later(broadcast_topic, {message: data})
   end
 
   def delete_message(data)
